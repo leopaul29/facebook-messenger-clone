@@ -6,7 +6,10 @@ import Message from "./Message";
 function App() {
   // useState = variable in REACT
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([
+    {username:'Leo', text:'first msg'},
+    {username:'Toto', text:'second message'}
+  ]);
   const [username, setUsername] = useState("");
 
   // useEffect = run code on a condition
@@ -15,8 +18,6 @@ function App() {
     // if its blank inside [], this code runs ONCE when the app components load
     // if we have a variable like input, it will be firing at every change
   }, []); // condition
-
-  console.log(messages);
 
   const sendMessage = (event) => {
     // all the logic to send the message
@@ -54,7 +55,7 @@ function App() {
       {/* messages themselves */}
 
       {messages.map((message) => (
-        <Message username={message.username} text={message.text} />
+        <Message username={username} message={message} />
       ))}
     </div>
   );
