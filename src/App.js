@@ -30,7 +30,10 @@ function App() {
 
     // useEffect = run code on a condition
     useEffect(() => {
-        setUsername(prompt("Please enter your name"));
+        let username = prompt("Please enter your name");
+        console.log(username)
+        if(username==="") username = "Stranger"
+        setUsername(username);
         // if its blank inside [], this code runs ONCE when the app components load
         // if we have a variable like input, it will be firing at every change
     }, []); // condition
@@ -51,7 +54,6 @@ function App() {
 
     return (
         <div className="App">
-            <img src="Messenger-logo.png" width="100px" height="100px" alt="messenger_logo"/>
             <h1>Facebook-Messenger-clone</h1>
             <h2>Welcome {username}</h2>
 
