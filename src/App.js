@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import GithubCorner from "react-github-corner";
+import DateFormat from "dateformat";
 import { FormControl, Input } from "@material-ui/core";
 import "./App.css";
 import Message from "./Message";
@@ -31,7 +32,7 @@ function App() {
 
   // useEffect = run code on a condition
   useEffect(() => {
-    let username = prompt("Please enter your name");
+    let username = "Leo"; //prompt("Please enter your name");
     console.log(username);
     if (username === "") username = "Stranger";
     setUsername(username);
@@ -52,6 +53,8 @@ function App() {
     // setMessages([...messages, { username: username, message: input }]);
     setInput("");
   };
+
+  let lastDay = 0;
 
   const githubCornerUrl =
     "https://github.com/leopaul29/facebook-messenger-clone";
@@ -95,9 +98,26 @@ function App() {
       </form>
 
       <FlipMove>
-        {messages.map(({ id, message }) => (
-          <Message key={id} username={username} message={message} />
-        ))}
+        {messages.map(({ id, message }) => {
+          const timestamp = message.timestamp;
+          const dateMessage = timestamp.toDate();
+          const formatedDate = DateFormat(
+            dateMessage,
+            "dddd, mmmm dS, yyyy, h:MM:ss TT"
+          );
+
+          if (dateMessage.getDay() === lastDay) {
+            return <Message key={id} username={username} message={message} />;
+          } else {
+            lastDay = dateMessage.getDay();
+            return (
+              <>
+                <div className="messageDate">{formatedDate}</div>
+                <Message key={id} username={username} message={message} />
+              </>
+            );
+          }
+        })}
       </FlipMove>
     </div>
   );
