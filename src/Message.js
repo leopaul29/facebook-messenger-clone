@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import DateFormat from "dateformat";
 import Card from "@material-ui/core/Card";
 import Tooltip from "@material-ui/core/Tooltip";
 import CardContent from "@material-ui/core/CardContent";
@@ -7,9 +8,12 @@ import "./Message.css";
 
 const Message = forwardRef(({ message, username }, ref) => {
   const isUser = username === message.username;
-  
+  const timestamp = message.timestamp;
+  const dateMessage = timestamp.toDate();
+  const formatedDate = DateFormat(dateMessage, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+
   return (
-    <Tooltip title="date" placement="top" arrow>
+    <Tooltip title={formatedDate} placement="top" arrow>
       <div ref={ref} className={`messages ${isUser && "messages__user"}`}>
         <div className="username">
           {!isUser && `${message.username || "Unknown User"}`}
