@@ -70,9 +70,15 @@ function App() {
         target="_blank"
         rel="noopener noreferrer"
       />
-      <h1>Facebook-Messenger-clone</h1>
-      <h2>Welcome {username}</h2>
-
+      <div className="header">
+        <img
+          className="header__logo"
+          src="Facebook_Messenger_logo_2020.svg"
+          alt="un triangle aux trois côtés égaux"
+        />
+        <h1 className="header__title">Messenger App</h1>
+        <h2 className="header__subtitle">Welcome {username}</h2>
+      </div>
       {/* form and button type submit allow the enter to send the message */}
       <form className="app__form">
         <FormControl className="app__formControl">

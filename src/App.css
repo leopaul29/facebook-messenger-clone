@@ -1,25 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+}
 .App {
-    text-align: center;
+  text-align: center;
+}
+.header {
+  margin-top: 30px;
+  margin-bottom: 100px;
+}
+.header__logo {
+  height: 87px;
+  width: 100px;
+}
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
+.header__title {
+  font-family: "Raleway";
+  font-size: 60px;
+  margin: 10px;
+}
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
+.header__subtitle {
+  font-family: "Raleway";
+  font-size: small;
+  color: gray;
 }
 .app__form {
-    padding: 20px;
-    position: fixed;
-    bottom: 0;
-    z-index: 1;
-    background-color: #e9e9eb;
-    width: 90%;
-    margin: 20px;
+  padding: 20px;
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+  background-color: #e9e9eb;
+  width: 90%;
+  margin: 20px;
 }
 
 .app__formControl {
-    display: flex !important;
-    flex-direction: row !important;
+  display: flex !important;
+  flex-direction: row !important;
 }
 
 .app__input {
-    flex: 1;
+  flex: 1;
 }
 
 .app__iconButton {
-    flex: 0;
+  flex: 0;
 }
