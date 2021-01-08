@@ -32,6 +32,7 @@
 
 /* ====== LISTING ===== */
 .listing {
+  flex: 1;
   overflow-y: auto;
 }
 ::-webkit-scrollbar {
@@ -52,10 +53,11 @@
 */
 /* ====== FOOTER ===== */
 .footer {
-  margin-top: auto;
+  margin: 0 10px;
 }
 .app__form {
   padding: 10px 20px;
+  
   z-index: 1;
   background-color: #e9e9eb;
   margin: 5px;
