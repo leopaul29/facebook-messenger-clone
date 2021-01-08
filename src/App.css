@@ -2,12 +2,16 @@
   margin: 0;
   padding: 0;
 }
-.App {
-  text-align: center;
+.container {
+  height: 100vh;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
 }
+/* ====== HEADER ===== */
 .header {
+  text-align: center;
   margin-top: 30px;
-  margin-bottom: 100px;
 }
 .header__logo {
   height: 87px;
@@ -25,25 +29,45 @@
   font-size: small;
   color: gray;
 }
-.app__form {
-  padding: 20px;
-  position: fixed;
-  bottom: 0;
-  z-index: 1;
-  background-color: #e9e9eb;
-  width: 90%;
-  margin: 20px;
+
+/* ====== LISTING ===== */
+.listing {
+  overflow-y: auto;
+}
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: #f5f5f5;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #000000;
 }
 
+/*::-webkit-scrollbar {
+  width: 6px;
+  border-left: 1px solid #e6ecf8;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #000;
+}
+*/
+/* ====== FOOTER ===== */
+.footer {
+  margin-top: auto;
+}
+.app__form {
+  padding: 10px 20px;
+  z-index: 1;
+  background-color: #e9e9eb;
+  margin: 5px;
+  border-radius: 35px !important;
+}
 .app__formControl {
   display: flex !important;
   flex-direction: row !important;
 }
-
 .app__input {
   flex: 1;
 }
-
 .app__iconButton {
   flex: 0;
 }

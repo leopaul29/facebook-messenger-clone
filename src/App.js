@@ -54,7 +54,8 @@ function App() {
     setInput("");
   };
 
-  let lastDay = 0;
+  //let lastDay = 0;
+  //let lastMinute = 0;
 
   const githubCornerUrl =
     "https://github.com/leopaul29/facebook-messenger-clone";
@@ -70,61 +71,68 @@ function App() {
         target="_blank"
         rel="noopener noreferrer"
       />
-      <div className="header">
-        <img
-          className="header__logo"
-          src="Facebook_Messenger_logo_2020.svg"
-          alt="un triangle aux trois côtés égaux"
-        />
-        <h1 className="header__title">Messenger App</h1>
-        <h2 className="header__subtitle">Welcome {username}</h2>
-      </div>
-      {/* form and button type submit allow the enter to send the message */}
-      <form className="app__form">
-        <FormControl className="app__formControl">
-          {/* set the input value of the state */}
-          <Input
-            className="app__input"
-            placeholder="Enter a message..."
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
+      <div className="container">
+        <div className="header">
+          <img
+            className="header__logo"
+            src="Facebook_Messenger_logo_2020.svg"
+            alt="messenger logo"
           />
+          <h1 className="header__title">Messenger App</h1>
+          <h2 className="header__subtitle">Welcome {username}</h2>
+        </div>
 
-          <IconButton
-            className="app__iconButton"
-            disabled={!input}
-            variant="contained"
-            color="primary"
-            type="submit"
-            onClick={sendMessage}
-          >
-            <SendIcon />
-          </IconButton>
-        </FormControl>
-      </form>
-
-      <FlipMove>
-        {messages.map(({ id, message }) => {
-          const timestamp = message.timestamp;
+        <div className="listing">
+          <FlipMove>
+            {messages.map(({ id, message }) => {
+              return <Message key={id} username={username} message={message} />;
+              /*const timestamp = message.timestamp;
           const dateMessage = timestamp.toDate();
           const formatedDate = DateFormat(
             dateMessage,
             "dddd, mmmm dS, yyyy, h:MM:ss TT"
           );
 
-          if (dateMessage.getDay() === lastDay) {
+          if (dateMessage.getMinutes() === lastMinute) {
             return <Message key={id} username={username} message={message} />;
           } else {
-            lastDay = dateMessage.getDay();
+            lastMinute = dateMessage.getMinutes();
             return (
               <>
                 <div className="messageDate">{formatedDate}</div>
                 <Message key={id} username={username} message={message} />
               </>
             );
-          }
-        })}
-      </FlipMove>
+          }*/
+            })}
+          </FlipMove>
+        </div>
+        <div className="footer">
+          {/* form and button type submit allow the enter to send the message */}
+          <form className="app__form">
+            <FormControl className="app__formControl">
+              {/* set the input value of the state */}
+              <Input
+                className="app__input"
+                placeholder="Enter a message..."
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+              />
+
+              <IconButton
+                className="app__iconButton"
+                disabled={!input}
+                variant="contained"
+                color="primary"
+                type="submit"
+                onClick={sendMessage}
+              >
+                <SendIcon />
+              </IconButton>
+            </FormControl>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

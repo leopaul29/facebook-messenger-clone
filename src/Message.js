@@ -9,11 +9,14 @@ import "./Message.css";
 const Message = forwardRef(({ message, username }, ref) => {
   const isUser = username === message.username;
   const timestamp = message.timestamp;
+  if(!timestamp){
+    console.log("here ",message)
+  }/*
   const dateMessage = timestamp.toDate();
-  const formatedDate = DateFormat(dateMessage, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+  const formatedDate = DateFormat(dateMessage, "dddd, mmmm dS, yyyy, h:MM:ss TT");*/
 
   return (
-    <Tooltip title={formatedDate} placement="top" arrow>
+    
       <div ref={ref} className={`messages ${isUser && "messages__user"}`}>
         <div className="username">
           {!isUser && `${message.username || "Unknown User"}`}
@@ -26,7 +29,6 @@ const Message = forwardRef(({ message, username }, ref) => {
           </CardContent>
         </Card>
       </div>
-    </Tooltip>
   );
 });
 
