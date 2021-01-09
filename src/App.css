@@ -12,6 +12,7 @@
 .header {
   text-align: center;
   margin-top: 30px;
+  margin-bottom: 20px;
 }
 .header__logo {
   height: 87px;
@@ -34,6 +35,9 @@
 .listing {
   flex: 1;
   overflow-y: auto;
+}
+.message_date{
+  text-align: center;
 }
 ::-webkit-scrollbar {
   width: 6px;

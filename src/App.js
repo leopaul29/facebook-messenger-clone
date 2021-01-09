@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     // run once when the app component loads
     db.collection("messages")
-      .orderBy("timestamp", "desc")
+      .orderBy("timestamp", "asc")
       .onSnapshot((snapshot) => {
         setMessages(
           snapshot.docs.map((doc) => ({
@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     let username = "Leo"; //prompt("Please enter your name");
     console.log(username);
-    if (username === "") username = "Stranger";
+    if (username === "") username = "Unknown";
     setUsername(username);
     // if its blank inside [], this code runs ONCE when the app components load
     // if we have a variable like input, it will be firing at every change
@@ -50,12 +50,18 @@ function App() {
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
     // append Message input to messages array
-    // setMessages([...messages, { username: username, message: input }]);
+    /*setMessages([
+      ...messages,
+      {
+        username: username,
+        message: input,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      },
+    ]);*/
     setInput("");
   };
 
-  //let lastDay = 0;
-  //let lastMinute = 0;
+  let lastMinute = 0;
 
   const githubCornerUrl =
     "https://github.com/leopaul29/facebook-messenger-clone";
@@ -85,27 +91,32 @@ function App() {
         <div className="listing">
           <FlipMove>
             {messages.map(({ id, message }) => {
-              return <Message key={id} username={username} message={message} />;
-              /*const timestamp = message.timestamp;
-          const dateMessage = timestamp.toDate();
-          const formatedDate = DateFormat(
-            dateMessage,
-            "dddd, mmmm dS, yyyy, h:MM:ss TT"
-          );
+              let timestamp = message.timestamp;
+              if (timestamp === null) {
+                timestamp = firebase.firestore.Timestamp.fromDate(new Date());
+              }
+              const dateMessage = timestamp.toDate();
 
-          if (dateMessage.getMinutes() === lastMinute) {
-            return <Message key={id} username={username} message={message} />;
-          } else {
-            lastMinute = dateMessage.getMinutes();
-            return (
-              <>
-                <div className="messageDate">{formatedDate}</div>
-                <Message key={id} username={username} message={message} />
-              </>
-            );
-          }*/
+              const formatedDate = DateFormat(
+                dateMessage,
+                "dddd, mmmm dS, yyyy, h:MM:ss TT"
+              );
+
+              if (dateMessage.getMinutes() === lastMinute) {
+                return (
+                  <Message key={id} username={username} message={message} />
+                );
+              } else {
+                lastMinute = dateMessage.getMinutes();
+                return (
+                  <>
+                    <div className="message_date">{formatedDate}</div>
+                    <Message key={id} username={username} message={message} />
+                  </>
+                );
+              }
             })}
-          </FlipMove>
+          </FlipMove>{" "}
         </div>
         <div className="footer">
           {/* form and button type submit allow the enter to send the message */}
