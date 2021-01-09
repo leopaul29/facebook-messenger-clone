@@ -55,13 +55,13 @@ function App() {
       {
         username: username,
         message: input,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       },
     ]);*/
+    const chat = document.querySelector("#chat");
+    chat.scrollTop = chat.scrollHeight;
+
     setInput("");
   };
-
-  let lastMinute = 0;
 
   const githubCornerUrl =
     "https://github.com/leopaul29/facebook-messenger-clone";
@@ -88,33 +88,10 @@ function App() {
           <h2 className="header__subtitle">Welcome {username}</h2>
         </div>
 
-        <div className="listing">
+        <div id="chat" className="messageList">
           <FlipMove>
             {messages.map(({ id, message }) => {
-              let timestamp = message.timestamp;
-              if (timestamp === null) {
-                timestamp = firebase.firestore.Timestamp.fromDate(new Date());
-              }
-              const dateMessage = timestamp.toDate();
-
-              const formatedDate = DateFormat(
-                dateMessage,
-                "dddd, mmmm dS, yyyy, h:MM:ss TT"
-              );
-
-              if (dateMessage.getMinutes() === lastMinute) {
-                return (
-                  <Message key={id} username={username} message={message} />
-                );
-              } else {
-                lastMinute = dateMessage.getMinutes();
-                return (
-                  <>
-                    <div className="message_date">{formatedDate}</div>
-                    <Message key={id} username={username} message={message} />
-                  </>
-                );
-              }
+              return <Message key={id} username={username} message={message} />;
             })}
           </FlipMove>{" "}
         </div>

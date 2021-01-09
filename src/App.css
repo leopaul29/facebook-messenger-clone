@@ -31,8 +31,8 @@
   color: gray;
 }
 
-/* ====== LISTING ===== */
-.listing {
+/* ====== messageList ===== */
+.messageList {
   flex: 1;
   overflow-y: auto;
 }
