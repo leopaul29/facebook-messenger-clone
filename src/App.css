@@ -36,7 +36,7 @@
   flex: 1;
   overflow-y: auto;
 }
-.message_date{
+.message_date {
   text-align: center;
 }
 ::-webkit-scrollbar {
@@ -47,21 +47,14 @@
   background-color: #000000;
 }
 
-/*::-webkit-scrollbar {
-  width: 6px;
-  border-left: 1px solid #e6ecf8;
-}
-::-webkit-scrollbar-thumb {
-  background-color: #000;
-}
-*/
 /* ====== FOOTER ===== */
 .footer {
   margin: 0 10px;
+  margin-bottom: 5px;
 }
 .app__form {
   padding: 10px 20px;
-  
+
   z-index: 1;
   background-color: #e9e9eb;
   margin: 5px;

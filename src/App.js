@@ -32,7 +32,7 @@ function App() {
 
   // useEffect = run code on a condition
   useEffect(() => {
-    let username = "Leo"; //prompt("Please enter your name");
+    let username = prompt("Please enter your name");
     console.log(username);
     if (username === "") username = "Unknown";
     setUsername(username);
@@ -57,8 +57,12 @@ function App() {
         message: input,
       },
     ]);*/
-    const chat = document.querySelector("#chat");
-    chat.scrollTop = chat.scrollHeight;
+
+    setTimeout(() => {
+      const chat = document.querySelector("#chat");
+      chat.scroll({ behavior: "smooth" });
+      chat.scrollTop = chat.scrollHeight;
+    }, 500);
 
     setInput("");
   };
