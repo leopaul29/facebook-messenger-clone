@@ -2,33 +2,43 @@
   margin: 0;
   padding: 0;
 }
+/* NAV */
+.nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 8px;
+  gap: 12px;
+}
+.nav__logo {
+  width: 75px;
+}
+.nav__userlist {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
+.nav__title {
+  font-family: "Raleway";
+  font-size: 32px;
+  margin: 10px;
+}
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
+.nav__userlist {
+  font-family: "Raleway";
+  font-size: small;
+  color: gray;
+}
+
 .container {
   height: 100vh;
   margin: auto;
   display: flex;
   flex-direction: column;
-}
-/* ====== HEADER ===== */
-.header {
-  text-align: center;
-  margin-top: 30px;
-  margin-bottom: 20px;
-}
-.header__logo {
-  height: 87px;
-  width: 100px;
-}
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
-.header__title {
-  font-family: "Raleway";
-  font-size: 60px;
-  margin: 10px;
-}
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
-.header__subtitle {
-  font-family: "Raleway";
-  font-size: small;
-  color: gray;
 }
 
 /* ====== messageList ===== */

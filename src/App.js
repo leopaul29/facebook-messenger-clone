@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import GithubCorner from "react-github-corner";
 import DateFormat from "dateformat";
-import { FormControl, Input } from "@material-ui/core";
+import { Avatar, FormControl, Input } from "@material-ui/core";
 import "./App.css";
 import Message from "./Message";
 import db from "./firebase";
@@ -15,8 +15,32 @@ function App() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [username, setUsername] = useState("");
+  const [userList, setUserList] = useState([]);
+
+  // useEffect = run code on a condition
+  useEffect(() => {
+    // if its blank inside [], this code runs ONCE when the app components load
+    // if we have a variable like input, it will be firing at every change
+    let username = prompt("Please enter your name");
+    //let username = "Leo";
+    if (username == "") username = "Unknown";
+    setUsername(username);
+  }, []); // condition
 
   useEffect(() => {
+    let yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 2);
+
+    // delete old messages
+    db.collection("messages")
+      .where("timestamp", "<", yesterday)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.delete();
+        });
+      });
+
     // run once when the app component loads
     db.collection("messages")
       .orderBy("timestamp", "asc")
@@ -30,15 +54,12 @@ function App() {
       });
   }, []);
 
-  // useEffect = run code on a condition
-  useEffect(() => {
-    let username = prompt("Please enter your name");
-    console.log(username);
-    if (username === "") username = "Unknown";
-    setUsername(username);
-    // if its blank inside [], this code runs ONCE when the app components load
-    // if we have a variable like input, it will be firing at every change
-  }, []); // condition
+  function intitializeUserList(message) {
+    if (userList.includes(message.username) || message.username === username)
+      return;
+    const newList = userList.concat(message.username);
+    setUserList(newList);
+  }
 
   const sendMessage = (event) => {
     // all the logic to send the message
@@ -48,6 +69,8 @@ function App() {
       username: username,
       message: input,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      avatar:
+        "https://eu.ui-avatars.com/api/?name=" + username.replace(" ", "+"),
     });
     // append Message input to messages array
     /*setMessages([
@@ -82,19 +105,29 @@ function App() {
         rel="noopener noreferrer"
       />
       <div className="container">
-        <div className="header">
+        <nav className="nav">
           <img
-            className="header__logo"
+            className="nav__logo"
             src="Facebook_Messenger_logo_2020.svg"
             alt="messenger logo"
           />
-          <h1 className="header__title">Messenger App</h1>
-          <h2 className="header__subtitle">Welcome {username}</h2>
-        </div>
+
+          <div className="nav__header">
+            <h1 className="nav__title">Messenger App</h1>
+            <h5 className="nav__userlist">
+              {username}
+              {userList.length != 0 &&
+                userList.map((username) => {
+                  return ", " + username;
+                })}
+            </h5>
+          </div>
+        </nav>
 
         <div id="chat" className="messageList">
           <FlipMove>
             {messages.map(({ id, message }) => {
+              intitializeUserList(message);
               return <Message key={id} username={username} message={message} />;
             })}
           </FlipMove>{" "}
